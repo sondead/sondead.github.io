@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pulse — Case Study · Ethan Hale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root { --mono: 'JetBrains Mono', ui-monospace, monospace; --sans: 'IBM Plex Sans', system-ui, sans-serif; --max: 880px; }
+html[data-theme="dark"] { --bg:#0b0d10; --bg-2:#111418; --line:#20262d; --text:#e6e8eb; --muted:#828a94; --faint:#545b64; --accent:#7ee0a6; --accent-dim:#2e5a44; }
+html[data-theme="light"] { --bg:#f7f8f6; --bg-2:#fff; --line:#dfe2dd; --text:#14181c; --muted:#5a626b; --faint:#9aa2ab; --accent:#1f8f5b; --accent-dim:#cdecd9; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--mono); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; transition:background .3s,color .3s; }
+a { color:inherit; text-decoration:none; }
+.wrap { max-width:var(--max); margin:0 auto; padding:0 28px; }
+::selection { background:var(--accent); color:var(--bg); }
+header { position:sticky; top:0; z-index:50; background:color-mix(in srgb,var(--bg) 86%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.nav { display:flex; align-items:center; justify-content:space-between; height:60px; max-width:1100px; margin:0 auto; padding:0 28px; }
+.brand { font-weight:700; letter-spacing:-.02em; }
+.brand .dot { color:var(--accent); }
+.back { font-size:13px; color:var(--muted); transition:color .15s; }
+.back:hover { color:var(--text); }
+.theme-btn { font-family:var(--mono); font-size:12px; cursor:pointer; background:var(--bg-2); color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:7px 11px; transition:all .15s; }
+.theme-btn:hover { color:var(--text); border-color:var(--accent-dim); }
+.nav-right { display:flex; gap:16px; align-items:center; }
+
+.hero { padding:80px 0 48px; border-bottom:1px solid var(--line); }
+.eyebrow { font-size:12px; color:var(--accent); margin-bottom:20px; letter-spacing:.05em; }
+.hero h1 { font-family:var(--sans); font-weight:600; font-size:clamp(34px,6vw,58px); letter-spacing:-.03em; line-height:1.05; margin-bottom:22px; }
+.lede { color:var(--muted); font-family:var(--sans); font-size:18px; line-height:1.7; max-width:62ch; }
+.meta-bar { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-top:44px; }
+.meta-cell { background:var(--bg); padding:18px 20px; }
+.meta-cell .k { font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.04em; margin-bottom:7px; }
+.meta-cell .v { font-size:14px; color:var(--text); }
+
+.cover { height:340px; border:1px solid var(--line); border-radius:12px; margin:48px 0; background:
+  repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 60px),
+  repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 60px),
+  var(--bg-2);
+  display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.cover::after { content:"[ project_cover.png ]"; color:var(--faint); font-size:13px; }
+.cover .badge { position:absolute; top:18px; left:18px; font-size:11px; color:var(--accent); border:1px solid var(--accent-dim); border-radius:5px; padding:5px 10px; }
+
+.body-sec { padding:44px 0; border-bottom:1px solid var(--line); }
+.body-sec h2 { font-family:var(--sans); font-weight:600; font-size:24px; letter-spacing:-.02em; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+.body-sec h2::before { content:""; width:9px; height:9px; background:var(--accent); border-radius:2px; }
+.body-sec p { color:var(--muted); font-family:var(--sans); font-size:16.5px; line-height:1.8; margin-bottom:18px; max-width:70ch; }
+.body-sec p strong { color:var(--text); font-weight:600; }
+.body-sec ul { list-style:none; margin:6px 0 18px; display:flex; flex-direction:column; gap:11px; }
+.body-sec li { color:var(--muted); font-family:var(--sans); font-size:16px; padding-left:22px; position:relative; line-height:1.6; }
+.body-sec li::before { content:"›"; color:var(--accent); position:absolute; left:0; }
+
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:44px 0; border-bottom:1px solid var(--line); }
+.stat { border:1px solid var(--line); border-radius:10px; padding:26px 22px; background:var(--bg-2); }
+.stat .n { font-family:var(--sans); font-weight:600; font-size:40px; color:var(--accent); letter-spacing:-.03em; }
+.stat .l { color:var(--muted); font-size:13px; margin-top:8px; }
+
+.code-block { background:var(--bg-2); border:1px solid var(--line); border-radius:10px; padding:22px 24px; margin:8px 0 22px; font-size:13.5px; color:var(--muted); overflow-x:auto; line-height:1.9; }
+.code-block .c { color:var(--faint); }
+.code-block .g { color:var(--accent); }
+
+.next { padding:60px 0; }
+.next a { display:flex; align-items:center; justify-content:space-between; border:1px solid var(--line); border-radius:12px; padding:30px 34px; background:var(--bg-2); transition:border-color .2s; }
+.next a:hover { border-color:var(--accent-dim); }
+.next .lbl { font-size:12px; color:var(--faint); margin-bottom:6px; }
+.next .nm { font-family:var(--sans); font-size:22px; font-weight:600; }
+.next .ar { color:var(--accent); font-size:24px; }
+
+footer { padding:30px 0; }
+.foot { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12px; color:var(--faint); }
+
+@media (max-width:720px){ .meta-bar{grid-template-columns:repeat(2,1fr);} .stats{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html" class="brand">ethan_hale<span class="dot">.</span></a>
+    <div class="nav-right">
+      <a href="index.html" class="back">← all work</a>
+      <button class="theme-btn" id="theme">◐ theme</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">CASE STUDY / PRJ-01</div>
+    <h1>Pulse — real-time<br />analytics at scale</h1>
+    <p class="lede">A live analytics dashboard that ingests millions of events per minute and renders them with sub-100ms latency — without melting the browser or the budget.</p>
+    <div class="meta-bar">
+      <div class="meta-cell"><div class="k">Role</div><div class="v">Lead Engineer</div></div>
+      <div class="meta-cell"><div class="k">Timeline</div><div class="v">5 months</div></div>
+      <div class="meta-cell"><div class="k">Team</div><div class="v">3 engineers</div></div>
+      <div class="meta-cell"><div class="k">Year</div><div class="v">2023</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cover"><span class="badge">// live demo</span></div>
+</div>
+
+<div class="body-sec"><div class="wrap">
+  <h2>Overview</h2>
+  <p>Pulse is the analytics surface our customers open first thing every morning. The previous version polled the server every few seconds and buckled under heavy traffic — charts lagged, tabs froze, and the data was always a little stale. <strong>I rebuilt it from the streaming layer up.</strong></p>
+  <p>This is mock copy you can replace with your own narrative. The structure below — problem, role, process, solution, results — works for most engineering case studies.</p>
+</div></div>
+
+<div class="body-sec"><div class="wrap">
+  <h2>The problem</h2>
+  <ul>
+    <li>Polling architecture couldn't keep up past ~500 concurrent dashboards.</li>
+    <li>Each client re-fetched the full dataset, wasting bandwidth and CPU.</li>
+    <li>Rendering 50k points per chart locked the main thread for seconds.</li>
+    <li>No backpressure meant traffic spikes cascaded into outages.</li>
+  </ul>
+</div></div>
+
+<div class="body-sec"><div class="wrap">
+  <h2>My role</h2>
+  <p>I led architecture and owned the streaming pipeline and the rendering layer. I paired with two engineers on the aggregation service and worked with design on progressive-disclosure patterns for dense data.</p>
+</div></div>
+
+<div class="body-sec"><div class="wrap">
+  <h2>Process &amp; approach</h2>
+  <p>We replaced polling with a WebSocket fan-out backed by a Go aggregation service. Events are pre-bucketed server-side so the client only ever receives deltas.</p>
+  <div class="code-block"><span class="c">// streaming contract — server pushes deltas only</span><br />ws.subscribe(<span class="g">"metrics.cpu"</span>, { window: <span class="g">"1m"</span> })<br />&nbsp;&nbsp;.on(<span class="g">"delta"</span>, applyToRingBuffer)<br />&nbsp;&nbsp;.on(<span class="g">"snapshot"</span>, rehydrate)</div>
+  <p>On the client, charts render to an offscreen canvas via a worker, so the main thread stays free for interaction even during traffic bursts.</p>
+</div></div>
+
+<div class="body-sec"><div class="wrap">
+  <h2>The solution</h2>
+  <ul>
+    <li>WebSocket delta streaming with server-side bucketing.</li>
+    <li>Ring-buffer state with a worker-driven canvas renderer.</li>
+    <li>Adaptive sampling that degrades gracefully under load.</li>
+    <li>Backpressure and reconnection baked into the client SDK.</li>
+  </ul>
+</div></div>
+
+<div class="stats"><div class="wrap" style="display:contents">
+  <div class="stat"><div class="n">&lt;100ms</div><div class="l">update latency, p95</div></div>
+  <div class="stat"><div class="n">12×</div><div class="l">more concurrent dashboards</div></div>
+  <div class="stat"><div class="n">−74%</div><div class="l">bandwidth per session</div></div>
+</div></div>
+
+<div class="body-sec"><div class="wrap">
+  <h2>Results</h2>
+  <p>Pulse now serves thousands of concurrent dashboards on a fraction of the previous infrastructure. Support tickets about lag dropped to nearly zero, and the streaming SDK was extracted into an internal package used by three other teams.</p>
+</div></div>
+
+<div class="next"><div class="wrap">
+  <a href="index.html">
+    <div><div class="lbl">NEXT</div><div class="nm">Back to all projects</div></div>
+    <span class="ar">→</span>
+  </a>
+</div></div>
+
+<footer><div class="wrap foot"><span>© 2025 Ethan Hale</span><span>case-study · pulse</span></div></footer>
+
+<script>
+  const root = document.documentElement;
+  const KEY = 'ph-mono-theme';
+  const saved = localStorage.getItem(KEY);
+  if (saved) root.setAttribute('data-theme', saved);
+  document.getElementById('theme').addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem(KEY, next);
+  });
+</script>
+</body>
+</html>

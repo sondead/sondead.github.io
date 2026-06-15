@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ethan Hale — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --max: 1100px;
+}
+html[data-theme="dark"] {
+  --bg: #0b0d10;
+  --bg-2: #111418;
+  --line: #20262d;
+  --text: #e6e8eb;
+  --muted: #828a94;
+  --faint: #545b64;
+  --accent: #7ee0a6;
+  --accent-dim: #2e5a44;
+}
+html[data-theme="light"] {
+  --bg: #f7f8f6;
+  --bg-2: #ffffff;
+  --line: #dfe2dd;
+  --text: #14181c;
+  --muted: #5a626b;
+  --faint: #9aa2ab;
+  --accent: #1f8f5b;
+  --accent-dim: #cdecd9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s ease, color .3s ease;
+}
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+
+/* selection */
+::selection { background: var(--accent); color: var(--bg); }
+
+/* Header */
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { font-weight: 700; letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; }
+.brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 26px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--muted); transition: color .15s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a::before { content: ""; color: var(--accent); }
+.theme-btn {
+  font-family: var(--mono); font-size: 12px; cursor: pointer;
+  background: var(--bg-2); color: var(--muted);
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 7px 11px; transition: all .15s;
+}
+.theme-btn:hover { color: var(--text); border-color: var(--accent-dim); }
+.menu-btn { display: none; background: none; border: 1px solid var(--line); color: var(--text); border-radius: 6px; padding: 6px 10px; cursor: pointer; font-family: var(--mono); }
+
+/* Hero */
+.hero { padding: 110px 0 90px; border-bottom: 1px solid var(--line); }
+.status { display: inline-flex; align-items: center; gap: 9px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 6px 13px; margin-bottom: 34px; }
+.status .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 var(--accent); animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); } 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.hero h1 { font-family: var(--sans); font-weight: 600; font-size: clamp(34px, 6vw, 62px); line-height: 1.05; letter-spacing: -.03em; margin-bottom: 26px; max-width: 16ch; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-sub { color: var(--muted); max-width: 56ch; font-size: 16px; line-height: 1.75; }
+.hero-meta { margin-top: 42px; display: flex; flex-wrap: wrap; gap: 14px; }
+.btn { font-size: 13px; padding: 11px 18px; border-radius: 7px; border: 1px solid var(--line); transition: all .15s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 500; }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost:hover { border-color: var(--text); }
+
+/* Section scaffolding */
+section { padding: 84px 0; border-bottom: 1px solid var(--line); }
+.sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 48px; }
+.sec-num { color: var(--accent); font-size: 13px; }
+.sec-title { font-family: var(--sans); font-weight: 600; font-size: clamp(22px, 3vw, 30px); letter-spacing: -.02em; }
+.sec-line { flex: 1; height: 1px; background: var(--line); align-self: center; }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; }
+.about-grid p { color: var(--muted); margin-bottom: 18px; font-family: var(--sans); font-size: 16px; line-height: 1.8; }
+.about-grid p strong { color: var(--text); font-weight: 600; }
+.facts { border: 1px solid var(--line); border-radius: 10px; padding: 4px 22px; height: fit-content; background: var(--bg-2); }
+.fact { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+.fact:last-child { border-bottom: none; }
+.fact .k { color: var(--faint); }
+.fact .v { color: var(--text); text-align: right; }
+
+/* Skills */
+.skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.skill-col { background: var(--bg); padding: 24px 22px; }
+.skill-col h4 { font-size: 12px; color: var(--accent); margin-bottom: 16px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+.skill-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.skill-col li { font-size: 14px; color: var(--muted); display: flex; gap: 9px; }
+.skill-col li::before { content: "›"; color: var(--accent); }
+
+/* Experience */
+.exp { display: flex; flex-direction: column; }
+.exp-row { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 26px 0; border-top: 1px solid var(--line); }
+.exp-row:hover .exp-role { color: var(--accent); }
+.exp-when { font-size: 13px; color: var(--faint); padding-top: 3px; }
+.exp-role { font-family: var(--sans); font-weight: 600; font-size: 19px; transition: color .15s; }
+.exp-co { color: var(--muted); font-size: 14px; margin: 4px 0 12px; }
+.exp-desc { color: var(--muted); font-family: var(--sans); font-size: 15px; max-width: 60ch; line-height: 1.7; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tag { font-size: 11px; color: var(--muted); border: 1px solid var(--line); padding: 3px 9px; border-radius: 5px; }
+
+/* Projects */
+.proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.proj { border: 1px solid var(--line); border-radius: 12px; padding: 26px; background: var(--bg-2); transition: border-color .2s, transform .2s; display: flex; flex-direction: column; min-height: 200px; }
+.proj:hover { border-color: var(--accent-dim); transform: translateY(-3px); }
+.proj-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.proj-id { font-size: 12px; color: var(--faint); }
+.proj-arrow { color: var(--muted); transition: transform .2s, color .2s; }
+.proj:hover .proj-arrow { color: var(--accent); transform: translate(3px,-3px); }
+.proj h3 { font-family: var(--sans); font-size: 21px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 8px; }
+.proj p { color: var(--muted); font-family: var(--sans); font-size: 14.5px; line-height: 1.65; margin-bottom: auto; }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+
+/* Contact */
+.contact { text-align: center; padding: 110px 0; }
+.contact h2 { font-family: var(--sans); font-weight: 600; font-size: clamp(30px, 5vw, 52px); letter-spacing: -.03em; margin-bottom: 22px; }
+.contact h2 a { color: var(--accent); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.contact p { color: var(--muted); font-family: var(--sans); font-size: 17px; max-width: 48ch; margin: 0 auto 36px; }
+.socials { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.socials a { font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 7px; padding: 10px 16px; transition: all .15s; }
+.socials a:hover { color: var(--text); border-color: var(--accent-dim); }
+
+/* Footer */
+footer { padding: 30px 0; }
+.foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: var(--faint); }
+
+@media (max-width: 820px) {
+  .nav-links { display: none; }
+  .menu-btn { display: inline-block; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .exp-row { grid-template-columns: 1fr; gap: 8px; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .nav-links.open { display: flex; position: absolute; top: 60px; left: 0; right: 0; flex-direction: column; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 18px 28px; gap: 18px; }
+}
+@media (max-width: 480px) {
+  .skills-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">ethan_hale<span class="dot">.</span></a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#about">01 / about</a>
+      <a href="#skills">02 / skills</a>
+      <a href="#work">03 / work</a>
+      <a href="#contact">04 / contact</a>
+      <button class="theme-btn" id="theme">◐ theme</button>
+    </nav>
+    <button class="menu-btn" id="menu">menu</button>
+  </div>
+</header>
+
+<a id="top"></a>
+<div class="hero">
+  <div class="wrap">
+    <span class="status"><span class="pulse"></span> available for new projects — Q3 2025</span>
+    <h1>Senior software engineer building <em>fast, reliable</em> web platforms &amp; developer tools.</h1>
+    <p class="hero-sub">I'm Ethan — I design and ship resilient systems end to end, from type-safe APIs to component libraries that teams actually enjoy using. Currently focused on performance, DX, and the unglamorous infrastructure that keeps products honest.</p>
+    <div class="hero-meta">
+      <a href="#work" class="btn btn-primary">View selected work →</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">About</span><span class="sec-line"></span></div>
+    <div class="about-grid">
+      <div>
+        <p>I've spent the last <strong>eight years</strong> working across the stack — building product features, untangling legacy systems, and obsessing over the developer experience of the tools my teammates rely on every day.</p>
+        <p>My sweet spot is the boundary between <strong>frontend and platform</strong>: design systems, build tooling, observability, and the API contracts that hold everything together. I care about code that's boring in the best way — predictable, well-tested, and easy to delete.</p>
+        <p>When I'm not shipping, I write about engineering tradeoffs, maintain a couple of open-source libraries, and mentor engineers stepping into their first senior roles.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="k">role</span><span class="v">Senior Software Engineer</span></div>
+        <div class="fact"><span class="k">location</span><span class="v">Remote · GMT+7</span></div>
+        <div class="fact"><span class="k">experience</span><span class="v">8 years</span></div>
+        <div class="fact"><span class="k">focus</span><span class="v">Web platforms · DX</span></div>
+        <div class="fact"><span class="k">stack</span><span class="v">TS · Go · Postgres</span></div>
+        <div class="fact"><span class="k">status</span><span class="v">Open to contracts</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Skills &amp; tooling</span><span class="sec-line"></span></div>
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h4>Languages</h4>
+        <ul><li>TypeScript</li><li>JavaScript</li><li>Go</li><li>Python</li><li>SQL</li></ul>
+      </div>
+      <div class="skill-col">
+        <h4>Frameworks</h4>
+        <ul><li>React</li><li>Next.js</li><li>Node.js</li><li>Svelte</li><li>tRPC</li></ul>
+      </div>
+      <div class="skill-col">
+        <h4>Infrastructure</h4>
+        <ul><li>PostgreSQL</li><li>Redis</li><li>Docker</li><li>AWS</li><li>Terraform</li></ul>
+      </div>
+      <div class="skill-col">
+        <h4>Practice</h4>
+        <ul><li>System design</li><li>CI / CD</li><li>Observability</li><li>Testing</li><li>Mentoring</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Experience</span><span class="sec-line"></span></div>
+    <div class="exp">
+      <div class="exp-row">
+        <div class="exp-when">2022 — Present</div>
+        <div>
+          <div class="exp-role">Senior Software Engineer</div>
+          <div class="exp-co">Northwind Labs · Remote</div>
+          <div class="exp-desc">Lead engineer on the internal platform team. Built the company-wide design system and shaved CI times by 60% with an incremental build pipeline.</div>
+          <div class="exp-tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Go</span><span class="tag">AWS</span></div>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-when">2019 — 2022</div>
+        <div>
+          <div class="exp-role">Software Engineer</div>
+          <div class="exp-co">Helix Systems · Hybrid</div>
+          <div class="exp-desc">Shipped real-time analytics features used by 40k+ daily users. Owned the migration from a monolith to event-driven services.</div>
+          <div class="exp-tags"><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">Kafka</span></div>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-when">2017 — 2019</div>
+        <div>
+          <div class="exp-role">Junior Developer</div>
+          <div class="exp-co">Bright Pixel Studio · On-site</div>
+          <div class="exp-desc">Built marketing sites and dashboards for early-stage clients. Learned to ship fast without breaking things — most of the time.</div>
+          <div class="exp-tags"><span class="tag">JavaScript</span><span class="tag">Vue</span><span class="tag">CSS</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Selected work</span><span class="sec-line"></span></div>
+    <div class="proj-grid">
+      <a href="case-study.html" class="proj">
+        <div class="proj-top"><span class="proj-id">PRJ-01</span><span class="proj-arrow">↗</span></div>
+        <h3>Pulse</h3>
+        <p>A real-time analytics dashboard rendering millions of events per minute with sub-100ms updates. Featured case study.</p>
+        <div class="proj-stack"><span class="tag">React</span><span class="tag">Go</span><span class="tag">WebSocket</span></div>
+      </a>
+      <a href="case-study.html" class="proj">
+        <div class="proj-top"><span class="proj-id">PRJ-02</span><span class="proj-arrow">↗</span></div>
+        <h3>Atlas</h3>
+        <p>An accessible, themeable component library and design-system toolkit adopted across 12 product teams.</p>
+        <div class="proj-stack"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">CSS</span></div>
+      </a>
+      <a href="case-study.html" class="proj">
+        <div class="proj-top"><span class="proj-id">PRJ-03</span><span class="proj-arrow">↗</span></div>
+        <h3>Forge</h3>
+        <p>A zero-config CLI build tool with incremental caching that cut average build times from 90s to under 15s.</p>
+        <div class="proj-stack"><span class="tag">Go</span><span class="tag">esbuild</span></div>
+      </a>
+      <a href="case-study.html" class="proj">
+        <div class="proj-top"><span class="proj-id">PRJ-04</span><span class="proj-arrow">↗</span></div>
+        <h3>Harbor</h3>
+        <p>A self-hosted deployment platform with preview environments and one-command rollbacks for small teams.</p>
+        <div class="proj-stack"><span class="tag">Docker</span><span class="tag">Node.js</span><span class="tag">Terraform</span></div>
+      </a>
+      <a href="case-study.html" class="proj">
+        <div class="proj-top"><span class="proj-id">PRJ-05</span><span class="proj-arrow">↗</span></div>
+        <h3>Lumen</h3>
+        <p>A markdown-first documentation engine with full-text search and versioned content, powering several OSS docs sites.</p>
+        <div class="proj-stack"><span class="tag">Next.js</span><span class="tag">MDX</span></div>
+      </a>
+      <a href="case-study.html" class="proj">
+        <div class="proj-top"><span class="proj-id">PRJ-06</span><span class="proj-arrow">↗</span></div>
+        <h3>Tide</h3>
+        <p>A lightweight API gateway handling auth, rate limiting, and request shaping with a declarative config.</p>
+        <div class="proj-stack"><span class="tag">Go</span><span class="tag">Redis</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head" style="justify-content:center;border:none"><span class="sec-num">05</span><span class="sec-title" style="color:var(--muted)">Contact</span></div>
+    <h2>Let's build something<br /><a href="mailto:hello@ethanhale.dev">hello@ethanhale.dev</a></h2>
+    <p>Available for senior engineering roles and selected contract work. I usually reply within a day.</p>
+    <div class="socials">
+      <a href="#">GitHub ↗</a>
+      <a href="#">LinkedIn ↗</a>
+      <a href="#">X / Twitter ↗</a>
+      <a href="#">Read.cv ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2025 Ethan Hale — built from scratch.</span>
+    <span>v1.0 · mono edition</span>
+  </div>
+</footer>
+
+<script>
+  const root = document.documentElement;
+  const KEY = 'ph-mono-theme';
+  const saved = localStorage.getItem(KEY);
+  if (saved) root.setAttribute('data-theme', saved);
+  document.getElementById('theme').addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem(KEY, next);
+  });
+  const menu = document.getElementById('menu');
+  const links = document.getElementById('navlinks');
+  menu.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+</body>
+</html>
